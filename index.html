@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Wajichat</title>
+        <link href="/css/style.css" rel="stylesheet" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="icon" type="image/png" href="favicon.png?v=2" />
+
+        
+    </head>
+ 
+    <body>
+        <input type="hidden" id="myId" value="">
+        <div class="banner-quest"><h2 class="hello">Bonjour !</h2><p style="text-align: center;color: #728081;"><b>On peut parler ici</b></p></div>
+        <div class="questionPlace">
+            <form action="/" method="post" id="formulaire_chat" class="center">
+                <!--<input type="text" class="full radius" name="message" id="message" placeholder="Votre question..." autofocus />-->
+
+                <textarea class="form-control" maxlength="220" rows="3" style="margin: auto; resize: none; height: 54px; border: 2px solid #728081;margin-bottom: 7px;overflow: hidden;" name="message" id="message" placeholder="Exprimez vous..."></textarea>
+                <button type="submit" id="envoi_message" class="btn btn-primary">Envoyer</button>
+            </form>
+
+            <section id="zone_chat">    
+            </section>
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script>
+            $(function() {
+                
+                $('form').each(function() {
+                    $(this).find('textarea').keypress(function(e) {
+                        // Enter pressed?
+                        if(e.which == 10 || e.which == 13 && !e.shiftKey) {
+                            $('#envoi_message').submit();
+                            $('#message').val('');
+                            return false;
+                        }
+                    });
+
+                    //$(this).find('input[type=submit]').hide();
+                });
+            });
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://talk.wajisan.eu/socket.io/socket.io.js"></script>
+        <script>
+            
+
+            
+            var socket = io.connect('https://talk.wajisan.eu', {secure: true});
+
+            var id = prompt('un pseudo ?');
+            if (id === null || id === "")
+                id = "anonyme";
+            $("#myId").val(id);
+
+            var username = id;
+            socket.emit('nouveau_client', { id: id, username: username });
+
+            socket.on('refresh', function(){
+                socket.emit('nouveau_client', { id: id, username: username });
+            })
+
+            socket.on('nouveau_client', function(arr)
+            {
+                //cleanChat();
+                var rcv = 0;
+                for (var i = 0; i < arr.length; i++)
+                {
+                    var row = arr[i];
+                    if (row.user_id != "undefined")
+                    {
+                        if (rcv == 0)
+                        {
+                            cleanChat();
+                            rcv = 1;
+                        }
+                        insereMessage(row.user_id, row.question, row.answer, row.date_text);
+                    }
+                }
+            })
+
+
+            socket.on('message', function(data) {
+                //if (data.id == id)
+                    insereMessage(data.id, data.message, "", data.date_text);
+            })
+
+            $('#formulaire_chat').submit(function () {
+                var message = $('#message').val();
+                var datetime = getDatetime();
+                console.log(datetime);
+
+                socket.emit('message', { id: id, username: username, message : message, date_text: datetime});
+                $('#message').val('').focus();
+                return false;
+            });
+            
+            function getDatetime() {
+                var currentdate = new Date();
+
+                var dd = currentdate.getDate();
+                var mm = currentdate.getMonth()+1; //January is 0!
+
+                var yyyy = currentdate.getFullYear();
+                if (dd < 10){
+                    dd = '0' + dd;
+                } 
+                if (mm < 10){
+                    mm = '0' + mm;
+                }
+
+                var HH = currentdate.getHours();
+                var MM = currentdate.getMinutes();
+                var SS = currentdate.getSeconds();
+
+                if (HH < 10){
+                    HH = '0' + HH;
+                } 
+                
+                if (MM < 10){
+                    MM = '0' + MM;
+                }
+
+                if (SS < 10){
+                    SS = '0' + SS;
+                }
+
+                var today = dd + '/' + mm + '/' + yyyy;
+                var hours = HH + ':' + MM + ':' + SS;
+                var datetime = today + ' - ' + hours;
+                return datetime;
+
+            }
+
+            function getID()
+            {
+                var parts = window.location.search.substr(1).split("&");
+                var $_GET = {};
+                for (var i = 0; i < parts.length; i++) {
+                    var temp = parts[i].split("=");
+                    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+                }
+                if (typeof $_GET['id'] !== 'undefined')
+                    return ($_GET['id']);
+                else
+                    return ("");
+            }
+
+            function cleanChat()
+            {
+                $('#zone_chat').html("");
+            }
+            function insereMessage(pseudo, question, answer, date) {
+                if (answer != "")
+                    $('#zone_chat').append('<div class="questzone"><p class="date">'+date+'</p><p class="qtitle">' + pseudo + '</p><p class="quest">' + question + '</p><p class="qtitle">Notre réponse</p><p class="answ"> ' + answer + '</p></div><center><hr align="center"></center>');
+                else 
+                    $('#zone_chat').append('<div class="questzone"><p class="date">'+date+'</p><p class="qtitle">' + pseudo + '</p><p class="quest">' + question + '</p></div><center><hr align="center"></center>');
+                window.scrollTo(0,document.body.scrollHeight);
+            }
+        </script>
+    </body>
+</html>

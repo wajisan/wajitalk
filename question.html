@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Chat Ima !</title>
+        <link href="css/style.css" rel="stylesheet" rel="stylesheet" />
+        <style>
+            #zone_chat strong {
+                color: white;
+                background-color: black;
+                padding: 2px;
+            }
+
+            .quest {
+                text-decoration: none;
+            }
+
+            #zone_quest{
+                font-size: 5em;
+                padding: 3%;
+                padding-top: 10%;
+                color:white;
+                font-family: avenirr;
+
+            }
+
+        </style>
+    </head>
+ 
+    <body style="width:100%;height:100%;background-image: url(img/question.jpg);background-repeat: no-repeat;margin:0px">
+        <div class="questionPlace">
+        <!--<h1 class="center title">LA QUESTION CI DESSOUS</h1>-->
+
+        <section id="zone_quest">    
+        </section>
+
+        </div>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://wajisan.eu:8000/socket.io/socket.io.js"></script>
+        <script>
+
+            // Connexion à socket.io
+            var socket = io.connect('http://wajisan.eu:8000');
+
+            document.title = "Question page";
+
+            socket.on('question', function(data) {
+                //console.log(data);
+                $('#zone_quest').html('<p><em>' + data + '</em></p>');
+            });
+
+        </script>
+    </body>
+</html>

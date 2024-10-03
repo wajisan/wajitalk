@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Chat Ima !</title>
+        <link href="css/style.css" rel="stylesheet" rel="stylesheet" />
+        <style>
+            #zone_chat strong {
+                color: white;
+                background-color: black;
+                padding: 2px;
+            }
+
+            .quest {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+ 
+    <body>
+        <div class="questionPlace">
+        <h1 class="center title">Questions posées :</h1>
+
+        <table id="zone_chat" style="width:100%">    
+        </table>
+
+        </div>
+        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="http://wajisan.eu:8000/socket.io/socket.io.js"></script>
+        <script>
+
+            // Connexion à socket.io
+            var socket = io.connect('http://wajisan.eu:8000');
+
+            var id = "*";
+
+            var username = id;
+            socket.emit('getAdmin', { id: id, username: username });
+
+            socket.on('refresh', function(){
+                socket.emit('getAdmin', { id: id, username: username });
+            })
+            
+            socket.on('getAdmin', function(arr)
+            {
+                cleanChat();
+                for (var i = 0; i < arr.length; i++)
+                {
+                    var row = arr[i];
+                    if (row.user_id != "undefined" && row.user_id)
+                        insereMessage(row.user_id, row.question, row.answer, row.id);
+                }
+                 //if (arr.id == id)
+                    //insereMessage(arr.pseudo, arr.message);
+            })
+
+
+            /* socket.on('message', function(data) {
+                console.log(data);
+                if (data.id == id)
+                    insereMessage(data.id, data.message);
+            }) */
+
+             socket.on('addLine', function(data) {
+                    insereMessage(data.id, data.message, "", data.qid);
+            })
+
+            $('#formulaire_chat').submit(function () {
+                var message = $('#message').val();
+                socket.emit('message', { id: id, username: username, message : message});
+                //insereMessage(pseudo, message);
+                $('#message').val('').focus();
+                return false;
+            });
+            
+
+            // Ajoute un message dans la page
+            function cleanChat()
+            {
+                $('#zone_chat').html("");
+            }
+
+            function insereMessage(pseudo, message, answer, qid) {
+                var inpanswer;
+                var buttons = '<input type="button" name="' + message + '" onclick="sendQuest.call(this)" value="ECRAN">';
+                console.log(answer);
+                if (answer == "")
+                {
+                    inpanswer = '<input type=text style="width:100%" class="answer_empty" id="'+ qid +'"/>';
+                    buttons += '<input type="button" name="'+ qid +'" value="REPONDRE" onclick="sendAnsw.call(this)" maxlength="220">';
+                }
+                else
+                    inpanswer = '<input type=text style="width:100%" class="answer_fill"  value="' + answer + '" readonly/>';
+
+                $('#zone_chat').prepend('<tr><td style="width:68%"><input style="width:100%" class="quest full" value="' + pseudo + ": " +  message + '" readonly/></td><td>' + inpanswer +'</td><td>'+ buttons + '</td></tr>');
+            }
+
+            function sendQuest(nb) {
+                var son = $(this).attr("name");
+                //console.log(son);
+                socket.emit('testother', son);
+            }
+
+            function sendAnsw() {
+                var id = $(this).attr("name");
+                var mess = $('#' + id).val();
+                //console.log(son);
+                socket.emit('sendAnsw', {id:id, message:mess});
+            }
+        </script>
+    </body>
+</html>

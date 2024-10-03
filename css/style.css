@@ -1,0 +1,545 @@
+/* general styles */
+@font-face {
+    font-family: MAAF;
+    src: url("../fonts/MAAF Regular.otf") format("opentype");
+}
+
+
+
+html,body {
+    width:100%;
+    height:100%;
+    position: relative;
+    font-family: sans-serif;
+}
+
+.questionPlace {
+   /* margin:auto;*/
+    min-width: 320px;
+        padding: 16px;
+}
+
+.title {
+    font-size: 27px;
+}
+
+.full {
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+#envoi_message {
+    margin-top: 0px;
+}
+
+.radius {
+    border-radius: 7px;
+}
+
+
+
+.whatever{
+    background-color: white;
+    display: inline-block;
+    width: 43px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 8px;
+    color:#00b1b7;
+    margin: 5px;
+}
+
+#checkboxes input[type=checkbox]{
+    display: none;
+}
+
+#checkboxes input[type=checkbox]:checked + .whatever{
+    background-color: red;
+    color: white;
+}
+
+.header-cloud {
+    font-size: 349%;
+    text-align:center;
+    font-family:'MAAF';
+    background-color:#00b1b7;
+    color:white;
+    width:100%;
+}
+
+.meteo {
+    margin: auto;
+    margin-top: 11px;
+    max-width: 414px;
+    margin-top: 11px;
+    width:100%;
+    min-height:219px;
+    background-color:white;
+}
+
+.comment {
+    /*overflow: scroll;*/
+    word-break: break-word;
+    padding: 7px;
+}
+
+.myWrapper {
+    position: relative;
+    /*height: 100%;*/
+}
+
+table {
+    /* margin-bottom: 20px */
+}
+
+.menu  td {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.header-profil{
+    /*padding-top: 20%;*/
+    margin-top: 50px;
+    /*height: 50%;*/
+    text-align: center;
+    vertical-align : middle;
+    color:white;
+}
+
+.signature {
+    color: white;
+    font-family: avant-gardee;
+    font-weight: bold;
+    margin:inherit;
+}
+
+.name_user{
+  font-family: 'avant-gardee';
+    font-size: 34px;
+}
+
+.photos {
+  background-color: white;
+  background-image: url("../img/elements/photos/fond.png"); 
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  background-position: center; 
+}
+
+.cloud-note {
+    background-color: white;
+    /*background-image: url("../img/elements/cloud/fond_cloud.png"); */
+    background-size: contain;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    background-position: center;
+    background-position-y: 100px;
+    min-height: 584px;
+}
+
+hr {
+    width:48%;
+    color:white;
+    display:inline-flex;
+    height: 5px;
+    border-top: 2px solid #eee;
+}
+
+.header-page{
+    color : white;
+    padding-top: 50px;
+    margin-top: 0px;
+    /*height: 30%;*/
+    height: 118px;
+    text-align: center;
+    vertical-align : middle;
+}
+
+.header-page h2 {
+    margin-top: 31px;
+}
+
+/* unvisited link */
+a:link {
+    text-decoration:none;
+}
+
+/* visited link */
+a:visited {
+    text-decoration:none;
+}
+
+/* mouse over link */
+a:hover {
+    text-decoration:none;
+}
+
+/* selected link */
+a:active {
+    text-decoration:none;
+}
+
+.line {
+    vertical-align : middle;
+    /*height: 15%;*/
+    line-height: 10%; /* hauteur de ligne (identique) */
+    white-space: nowrap;
+}
+
+.lone {
+    background-color: white;
+    color: #00b1b7;
+}
+
+.ltwo {
+    background-color: #00b1b7;
+    color: white;
+}
+
+.line h2 {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 6%;
+}
+
+.line h3 {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 5%;
+}
+
+.note{
+    padding-top: 0px;
+    /*height:29%;*/
+    text-align: center
+}
+
+.horaire {
+    text-align: center;
+    padding-top: 14px;
+    font-size: 20px;
+}
+.header-profil h2 {
+    margin-top: 0px;
+    color: white;
+}
+
+.default{
+    margin-bottom: 12px;
+    margin-left: 6%;
+}
+
+.picto img{
+    width:109px;
+    height: 109px;
+}
+
+.picto p{
+    padding-top: 10px;
+    color: #00b1b7;
+}
+
+.cinq {
+    width:20%;
+}
+
+
+.cinq input{
+    background-image: url(http://images.clipartpanda.com/sun-clipart-Transparent-sun-with-shades-clipart-picture-5.png);
+    max-width: 62px;
+    max-height:62px;
+    background-size: cover;
+    width: 100%;
+    height: 62px;
+    font-size:0;
+    background-color: #1590a5;
+    border: 0;
+}
+
+.white_b, .white_b input{
+    background-color: white;
+}
+
+.borde_b input{
+    border: 3px;
+    border-color: black;
+}
+
+.logo-header {
+    width: 54px;
+    height: 54px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 9px;
+}
+
+.allback {
+    background-image: url(../img/elements/planning/fondseul.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.plann {
+    border-spacing: 0px 15px;
+    display: table;
+    /*background-color: white;*/
+    color: #00b1b7;
+    width:80%;
+    margin:auto;
+    border-radius: 0px 0px 25px 0px;
+    border-collapse: separate;
+}
+
+.plann td{
+    padding: 10px;
+}
+
+.plann td:nth-child(1){
+    /*color: black;*/
+   /* border-color: #00b1b7;
+    border: solid;
+    border-width: 2px;
+    border-right-color: white;*/
+    color: #fc624b;
+    width: 27%;
+    background-color: white;
+}
+
+.plann td:nth-child(1) p{
+    /*color: white;*/
+    font-weight: bold;
+    margin: 0;
+}
+
+.plann td:nth-child(2)
+{
+    background-color: #fc624b;
+    color: white;
+    text-align: center;
+}
+
+.plann td:nth-child(2) p:nth-child(1){
+    
+    font-size: 13px;
+}
+
+.plann td:nth-child(2) p:nth-child(2){
+    font-style: italic;
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+button .btn {
+    margin: auto;
+}
+
+#sub_mail {
+    background-color: inherit;
+  background-image: url(../img/elements/photos/mail.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* put the height and width of your image here */
+  height: 32px;
+  width: 142px;
+  border: none;
+  z-index: 10;
+}
+
+footer {
+    background-color: #00b1b7;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height:24px;
+    text-align: center;
+}
+
+a .h2 {
+    color: white;
+}
+
+            #zone_chat strong {
+                color: white;
+                background-color: black;
+                padding: 2px;
+            }
+
+    .navbar-nav>li>a {
+
+        color: white !important;
+
+    }
+    .icon-bar {
+
+        background-color: white !important;
+
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #728081;
+    }
+
+    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+     background-color: #728081;
+    }
+
+    #zone_chat {
+            padding-top: 20px;
+    }
+
+    .questzone {
+            margin-bottom: 21px;
+                font-family: avenirr;
+    }
+    
+    .quest {
+        border: 5px solid #5eb2da;
+        border-radius: 6px;
+        padding: 9px;
+        text-align: left;
+        word-wrap: break-word;
+    }
+    
+    .answ {
+        border: 5px solid #728081;
+        border-radius: 6px;
+        padding: 9px;
+        text-align: right;
+    }
+
+    .qtitle {
+        font-family: 'avenirr';
+        color: #728081;
+        margin-bottom: 0px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #728081;
+        border-color: #728081;
+    }
+
+    .banner-quest {
+        /* margin-top: 120px; */
+        background-color: #f6f2f2;
+        padding: 8px;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        max-width: 100%;
+        height: 73px;
+        z-index: 100;
+    }
+
+    .questionPlace {
+        /*position: relative;*/
+        z-index: 90;
+        padding-bottom: 105px;
+        padding-top: 73px;
+    }
+
+    #formulaire_chat {
+        position: fixed;
+        height: 105px;
+        bottom: 0px;
+        width: 100vw;
+        max-width: 100%;
+        background-color: white;
+        padding-right: 29px;
+    }
+
+    .hello {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            font-size: 25px;
+            font-family: avenirr;
+            margin-bottom: 0px;
+            margin-top: 0px;
+    }
+
+@media only screen and (orientation: landscape) {
+    body {
+        max-height: 100% !important;
+    }
+    h2 {
+        padding-top: 0px !important;
+    }
+    .header-profil {
+        padding-top: 0%;
+    }
+    .line.lone,.line.ltwo{
+        min-height: 60px;
+    }
+    footer.bottom{
+        position: inherit;
+    }
+}
+
+.rotatet{
+    -webkit-transform: rotate(-5deg);
+
+/* Firefox */
+-moz-transform: rotate(-5deg);
+
+/* IE */
+-ms-transform: rotate(-5deg);
+
+/* Opera */
+-o-transform: rotate(-5deg);
+}
+
+.lightmaaf{
+        font-family: "maaf-light";
+}
+
+@font-face {
+    font-family: 'Pacifico';
+    src: url(../fonts/Pacifico.ttf);
+}
+
+@font-face {
+    font-family: 'maaf-light';
+    src: url(../fonts/MAAF-Light.otf);
+}
+
+@font-face {
+    font-family: 'avenirr';
+    src: url(../fonts/ima-font/AvenirLTStd-Black.otf) format("opentype");;
+}
+
+@font-face {
+    font-family: 'avant-gardee';
+    src: url(../fonts/ima-font/ITCAvantGardeStd-XLt.otf) format("opentype");;
+}
+/*
+
+@media (max-width: 800px){
+  #home{
+    min-height: 884px;    
+   }
+
+   .title-h{
+      font-size: 6rem !important;
+          font-weight: 400;
+      color: black;
+      margin-top: 80%;
+      letter-spacing: 6px
+   }
+
+   .undertitle-h{
+
+      font-size: 45px !important;
+          font-weight: 400;
+      color: black;
+   }
+}
+*/
